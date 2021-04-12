@@ -3,12 +3,14 @@ import Block from './Block'
 import axios from 'axios'
 
 export default function Game () {
-    // const [data, setData] = useState([
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0]
-    // ])
+    const [data, setData] = useState([
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ])
+
+    
     useEffect( () => {
         const userBestScore = async function () {
             try {
@@ -18,7 +20,7 @@ export default function Game () {
                     'authorization': token
                 }
                 var score = {
-                    'current_score': 30   // req.body.best_score
+                    'current_score': 30   // req.body.current_score
                 }
                 
                 const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/score`, score, { headers: authHeaders })
@@ -36,17 +38,17 @@ export default function Game () {
 
 
 
-    // {data.map((row, idxOne) => {
-    //     return (
-    //         <div key={idxOne}>
-    //             {row.map((digit, idxTwo) => <Block num={digit} key={idxTwo} />)}
-    //         </div>
-    //     )
-    // })}
+    {data.map((row, idxOne) => {
+        return (
+            <div key={idxOne}>
+                {row.map((digit, idxTwo) => <Block num={digit} key={idxTwo} />)}
+            </div>
+        )
+    })}
 
     return (
         <div className="main_container">
-            {/* <h1>{JSON.stringify(data)}</h1> */}
+            <h1>{JSON.stringify(data)}</h1>
             
         </div>
     )
