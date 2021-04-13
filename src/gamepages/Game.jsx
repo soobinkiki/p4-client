@@ -32,13 +32,10 @@ export default function Game () {
 
     // Initialize the game
     const initialize = () => {
-        let storage = data
-        addNumber(storage)
-        // console.table(newGrid)
+        let storage = [...data]
         addNumber(storage)
         console.table(storage)
         setData(storage)
-        // console.log(data);
     }
  
     // Add random number (2 or 4 if the board is empty)
@@ -64,71 +61,97 @@ export default function Game () {
     // Functions for (left right up down)
         const handleKeyPress = (e) => {
             let tempData = [...data]  
+            // console.log('up arrow')
             if (e.keyCode === 38) {
-                // [2200]
-                // temp = [2, 2, 0, 0]
-                // 2 0
-                // 0 2
-                // 2 2
-                // 0 0
-                // row column [][]
-                // let temp = []
-                // for (let j=0; j < tempData[0].length; j++) { 
-                //     for (let i=0; i < tempData.length; i++) { 
-                //         if (tempData[i][j] !== 0) {
-                //             temp.push(tempData[i][j])
-                            
-                //         }
-                //     }
-                // }
-                // console.log(temp);
-                // for (let i=0; i < tempData.length; i++) { //i=0 -> 
-                //     for (let j=0; j < tempData[0].length; j++){ 
-                //         let temp = []
-                //         let num = 0
-                //         //      [0][0] 
-                //         if (tempData[i][j] !== 0) {
-                //             temp.append(tempData[i][j])
-                //         } else temp.append(num)
-
                 for (let i=0; i < tempData.length; i++) {
-                    for (let k=0; k < tempData[0].length; k++){
-                        for (let j=i-1; j >= 0; j--) { // i = 3, j = 0
+                    for (let k=0; k < tempData[0].length; k++){ // column
+                        for (let j=i-1; j >= 0; j--) {          // row      i = 3, j = 0 
                             if (tempData[j][k] === 0) {   // row1 column0 is equal to 0
                                 tempData[j][k] = tempData[j+1][k]
                                 tempData[j+1][k] = 0
-                            } 
+                            } else if (tempData[j][k] === tempData[j+1][k]) {
+                                tempData[j][k] += tempData[j+1][k]
+                                tempData[j+1][k] = 0
+                            } else if (tempData[j][k] === 2048) {
+                                alert('you win!')
+                            }
                         }
                     }
                 }
-                // 2 j=0
-                // 2 j=1
-                // 0 i=2
-                // 0
-                // setStorage(tempData)
-                setData(tempData)
-                console.log("adfadfadfafafafdf");
-                console.log(data);
-                    // 2   i=0
-                    // 2   i=1  
-                    // 0   i=2
-                    // 0   i=3 - j=2, 1, 0
-                // up arrow
             }
+
             else if (e.keyCode === 40) {
-                console.log('down arrow');
+                // console.log('down arrow');
                 // down arrow
+                for (let i=0; i < tempData.length; i++) {
+                    for (let k=0; k < tempData[0].length; k++){ // column
+                        for (let j=i+1; j < tempData[0].length; j++) {          // row      i = 3, j = 0 
+                            if (tempData[j-1][k] !== 0 && tempData[j][k] === 0) {   // row1 column0 is equal to 0
+                                tempData[j][k] = tempData[j-1][k]
+                                tempData[j-1][k] = 0
+                            } else if (tempData[j-1][k] === tempData[j][k]) { // [0][k] === [1][k]
+                                tempData[j][k] += tempData[j-1][k]
+                                tempData[j-1][k] = 0
+                            } else if (tempData[j][k] === 2048) {
+                                alert('you win!')
+                            }
+                            
+                        }
+                    }
+                }
             }
+
             else if (e.keyCode === 37) {
-                console.log('left arrow');
+                // console.log('left arrow');
                 // left arrow
+                for (let i=0; i < tempData.length; i++) {
+                    for (let k=0; k < tempData[0].length; k++){                 // column
+                        for (let j=i; j >= 0; j--) {          // row      i = 3, j = 0 
+                            if (tempData[j][k] !== 0 && tempData[j][k-1] === 0) {   // j=0 k=0 
+                                tempData[j][k-1] = tempData[j][k]
+                                tempData[j][k] = 0
+                            } 
+                            // j -> 3 not working
+
+                            // else if (tempData[j][k] === tempData[j][k+1]) { // [0][k] === [1][k]
+                            //     tempData[j][k+1] += tempData[j][k]
+                            //     tempData[j][k] = 0
+                            // } else if (tempData[j][k] === 2048) {
+                            //     alert('you win!')
+                            // }
+                            
+                        }
+                    }
+                }
             }
+
             else if (e.keyCode === 39) {
-                console.log('right arrow');
-                // right arrow
+                // console.log('right arrow');
+                // // right arrow
+                for (let i=0; i < tempData.length; i++) {
+                    for (let k=0; k < tempData[0].length; k++){                 // column
+                        for (let j=i; j < tempData[0].length; j++) {          // row      i = 3, j = 0 
+                            if (tempData[j][k] !== 0 && tempData[j][k+1] === 0) {   // j=0 k=0 
+                                tempData[j][k+1] = tempData[j][k]
+                                tempData[j][k] = 0                        
+                            } else if (tempData[j][k] === tempData[j][k+1]) { // [0][k] === [1][k]
+                                tempData[j][k+1] += tempData[j][k]
+                                tempData[j][k] = 0
+                            } else if (tempData[j][k] === 2048) {
+                                alert('you win!')
+                            }
+                        }
+                    }
+                }
             }
+
+
+
+            initialize()
+
         }
-        document.onkeydown = handleKeyPress;
+
+        document.onkeyup = handleKeyPress;
 
     
     // check game status
@@ -136,6 +159,7 @@ export default function Game () {
         // board filled up - 2048 exist no? - lose
 
     // Reset?
+
 
     useEffect( () => {
         initialize()
@@ -167,7 +191,7 @@ export default function Game () {
 
     return (
         <div 
-            onKeyDown={ e => handleKeyPress(e)} 
+            onKeyUp={ e => handleKeyPress(e)} 
             tabIndex="1"
             className="main_container">
             {data.map((row, indexOne) => {
