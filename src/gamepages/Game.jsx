@@ -65,14 +65,35 @@ export default function Game () {
         const handleKeyPress = (e) => {
             let tempData = [...data]  
             if (e.keyCode === 38) {
-                // console.log('up arrow');
-                // // compare data[0][0] data[1][0] data[2][0] data [3][0]
-                // console.log(data);
-                // console.log(data[1][2]);
+                // [2200]
+                // temp = [2, 2, 0, 0]
+                // 2 0
+                // 0 2
+                // 2 2
+                // 0 0
+                // row column [][]
+                // let temp = []
+                // for (let j=0; j < tempData[0].length; j++) { 
+                //     for (let i=0; i < tempData.length; i++) { 
+                //         if (tempData[i][j] !== 0) {
+                //             temp.push(tempData[i][j])
+                            
+                //         }
+                //     }
+                // }
+                // console.log(temp);
+                // for (let i=0; i < tempData.length; i++) { //i=0 -> 
+                //     for (let j=0; j < tempData[0].length; j++){ 
+                //         let temp = []
+                //         let num = 0
+                //         //      [0][0] 
+                //         if (tempData[i][j] !== 0) {
+                //             temp.append(tempData[i][j])
+                //         } else temp.append(num)
 
                 for (let i=0; i < tempData.length; i++) {
                     for (let k=0; k < tempData[0].length; k++){
-                        for (let j=i-1; j >= 0; j--) {// i = 3, j = 0
+                        for (let j=i-1; j >= 0; j--) { // i = 3, j = 0
                             if (tempData[j][k] === 0) {   // row1 column0 is equal to 0
                                 tempData[j][k] = tempData[j+1][k]
                                 tempData[j+1][k] = 0
@@ -80,6 +101,10 @@ export default function Game () {
                         }
                     }
                 }
+                // 2 j=0
+                // 2 j=1
+                // 0 i=2
+                // 0
                 // setStorage(tempData)
                 setData(tempData)
                 console.log("adfadfadfafafafdf");

@@ -15,9 +15,11 @@ export default function Block ({ cell }) {
     }
 
     const { blockStyle } = style
-
+    
+    
     return (
         <div 
+
             style={{
                 ...blockStyle,
                 // background: getColors(num)
