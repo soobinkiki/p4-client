@@ -57,9 +57,10 @@ nav a:hover {
 
 /*------------In-game MAIN----------------*/
 .main_container {
-  width: 500px;
-  height: 700px;
+  width: max-content;
   background-color: rgb(223, 207, 184);
+  margin: auto;
+  padding: 10px;
   border-radius: 10px;
 }
 
@@ -98,5 +99,31 @@ nav a:hover {
 #main_howtoplay_text {
   font-size: 1.1em;
 }
+
+/*----------------------------------------*/
+
+
+
+
+
+/*------------In-game board----------------*/
+
+.block_container {
+  display: flex;
+}
+
+/* .block {
+  height: 80px;
+  width: 80px;
+  background-color: lightgray;
+  margin: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  font-weight: 800;
+  color: white;
+} */
+
 
 /*----------------------------------------*/
