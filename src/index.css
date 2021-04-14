@@ -57,9 +57,10 @@ nav a:hover {
 
 /*------------In-game MAIN----------------*/
 .main_container {
-  width: max-content;
+  width: 520px;
+  height: 700px;
+  margin-top: 30px;
   background-color: rgb(223, 207, 184);
-  margin: auto;
   padding: 10px;
   border-radius: 10px;
 }
@@ -110,8 +111,16 @@ nav a:hover {
 
 .block_container {
   display: flex;
+  justify-content: center;
+  
 }
 
+.main_block_container {
+  width: max-content;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(223, 207, 184);
+}
 /* .block {
   height: 80px;
   width: 80px;

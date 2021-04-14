@@ -3,12 +3,12 @@ export default function Block ({ cell }) {
         blockStyle: {
             height: 120,
             width: 120,
-            background: "lightgray",
+            background: "darkgray",
             margin: 3,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            fontSize: 75,
+            fontSize: 55,
             fontWeight: 800,
             color: "white",
           }
@@ -23,8 +23,11 @@ export default function Block ({ cell }) {
             style={{
                 ...blockStyle,
                 // background: getColors(num)
-                color: cell === 2 || cell === 4 ? "#645B52" : 
-                       cell === 8 ? "#cfa563" : "#877456"
+                color: cell === 2 || cell === 4 ? "#645B52" 
+                     : cell === 8 || cell === 16 ? "#877456" 
+                     : cell === 32 || cell === 64 || cell === 128 ? "#b29700"
+                     : cell === 256 || cell === 512 || cell === 1024 ? "gold" : "red"
+
             }}>
         
             {/* {cell} */}

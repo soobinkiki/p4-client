@@ -25,7 +25,7 @@ const handleFacebookClick = e => {
 
 const Login = ({ user }) => {
     if(user) {
-        return <Redirect to={{ pathname: '/' }}/>
+        return <Redirect to={{ pathname: '/game' }}/>
     } else {
         return <div id="login_container">
             <h1>Login</h1>
