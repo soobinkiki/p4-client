@@ -22,7 +22,6 @@ export default function Block ({ cell }) {
 
             style={{
                 ...blockStyle,
-                // background: getColors(num)
                 color: cell === 2 || cell === 4 ? "#645B52" 
                      : cell === 8 || cell === 16 ? "#877456" 
                      : cell === 32 || cell === 64 || cell === 128 ? "#b29700"

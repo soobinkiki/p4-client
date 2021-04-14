@@ -68,17 +68,18 @@ export default function Game () {
             // console.log('up arrow')
             // console.log(e.keyCode);
             if (e.keyCode === 38) {
-                var row = false
-                var colum = false
+                // var colum = false
                 for (let i=0; i < tempData.length; i++) { // 0 1 2 3 
+                    var found = [false, false, false, false]
                     for (let j=i-1; j >= 0; j--){ //  row j=-1 0 1 2
                         for (let k=0; k < tempData[0].length; k++) {  // column   i = 3, j = 0 
                             if (tempData[j][k] === 0) {   // row1 column0 is equal to 0
                                 tempData[j][k] = tempData[j+1][k]
                                 tempData[j+1][k] = 0
-                            } else if (tempData[j][k] === tempData[j+1][k]) {
+                            } else if (!found[k] && tempData[j][k] === tempData[j+1][k]) {
+                                found[k] = true 
                                 tempData[j][k] += tempData[j+1][k]
-                                tempData[j+1][k] = 0
+                                tempData[j+1][k] = 0                              
                             }
                             if (tempData[j][k] === 2048) alert('you win!')
 
@@ -89,14 +90,16 @@ export default function Game () {
                 // console.log('down arrow');
                 // down arrow
                 for (let i=tempData.length - 1; i >=0; i--) {  // i= 3 2 1 0
+                    var found = [false, false, false, false]
                     for (let j=i+1; j < tempData.length; j++){ //   j= 3 2 1 0
                         for (let k=0; k < tempData[0].length; k++) {          // row      i = 3, j = 0 
                             if (tempData[j-1][k] !== 0 && tempData[j][k] === 0) {   // row1 column0 is equal to 0
                                 tempData[j][k] = tempData[j-1][k]
                                 tempData[j-1][k] = 0
-                            } else if (tempData[j-1][k] === tempData[j][k]) { // [0][k] === [1][k]
+                            } else if (!found[k] && tempData[j-1][k] === tempData[j][k]) { // [0][k] === [1][k]
                                 tempData[j][k] += tempData[j-1][k]
                                 tempData[j-1][k] = 0
+                                found[k] = true
                             }
                             if (tempData[j][k] === 2048) alert('you win!')
                         }
@@ -106,14 +109,16 @@ export default function Game () {
                 // console.log('left arrow');
                 // left arrow
                 for (let i=0; i < tempData.length; i++) { // i=0 1 2 3
+                    var found = [false, false, false, false]
                     for (let k=i; k >= 1; k--){    //        k=  1 2 3 
                         for (let j=0; j < tempData.length; j++) {          // row      i = 3, j = 0 
                             if (tempData[j][k] !== 0 && tempData[j][k-1] === 0) {   // j=0 k=0 
                                 tempData[j][k-1] = tempData[j][k]
                                 tempData[j][k] = 0
-                            }  else if (tempData[j][k] === tempData[j][k-1]) { // [0][k] === [1][k]
+                            }  else if (!found[j] && tempData[j][k] === tempData[j][k-1]) { // [0][k] === [1][k]
                                 tempData[j][k-1] += tempData[j][k]
                                 tempData[j][k] = 0
+                                found[j] = true
                             }
                             if (tempData[j][k] === 2048) alert('you win!')
 
@@ -123,14 +128,16 @@ export default function Game () {
             } else if (e.keyCode === 39) {
                 // // right arrow
                 for (let i=tempData[0].length - 1; i >= 0; i--) { //   i= 3 2 1 0
+                    var found = [false, false, false, false]
                     for (let k=i; k < tempData[0].length-1; k++){ // k= 2 1 0 -1
                         for (let j=0; j < tempData.length; j++) {  //             // row      i = 3, j = 0 
                             if (tempData[j][k] !== 0 && tempData[j][k+1] === 0) {   // j=0 k=0 
                                 tempData[j][k+1] = tempData[j][k]
                                 tempData[j][k] = 0
-                            } else if (tempData[j][k] === tempData[j][k+1]) { // [0][k] === [1][k]
+                            } else if (!found[j] && tempData[j][k] === tempData[j][k+1]) { // [0][k] === [1][k]
                                 tempData[j][k+1] += tempData[j][k]
                                 tempData[j][k] = 0
+                                found[j] = true
                             }
                             if (tempData[j][k] === 2048) alert('you win!')
                         }
@@ -144,7 +151,9 @@ export default function Game () {
                 addNumber(tempData)
                 // addNumber(tempData)
             }
+
             setData(tempData)
+
         }
 
         document.onkeyup = handleKeyPress;
