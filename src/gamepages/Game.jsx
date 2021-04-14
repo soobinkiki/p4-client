@@ -10,7 +10,10 @@ export default function Game () {
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ])
-
+    // [0][0] [0][1] [0][2] [0][3]
+    // [1][0] [1][1] 
+    
+    // const [score, setScore] = useState("")
     // const [storage, setStorage] = useState([
     //     [0, 0, 0, 0],    // 8 2 2 0                      
     //     [0, 0, 0, 0],   // 2 2 0 0
@@ -59,22 +62,23 @@ export default function Game () {
         }
     }
 
-    // --------------- Functions for (left right up down) ---------------
-        const handleKeyPress = (e) => {
+    // arrow functions
+    const handleKeyPress = (e) => {
             let tempData = [...data]  
             // console.log('up arrow')
-            console.log(e.keyCode);
+            // console.log(e.keyCode);
             if (e.keyCode === 38) {
-                for (let i=0; i < tempData.length; i++) {
-                    for (let j=i; j >= 0; j--){ // column
-                        for (let k=0; k < tempData[0].length; k++) {          // row      i = 3, j = 0 
+                var row = false
+                var colum = false
+                for (let i=0; i < tempData.length; i++) { // 0 1 2 3 
+                    for (let j=i-1; j >= 0; j--){ //  row j=-1 0 1 2
+                        for (let k=0; k < tempData[0].length; k++) {  // column   i = 3, j = 0 
                             if (tempData[j][k] === 0) {   // row1 column0 is equal to 0
                                 tempData[j][k] = tempData[j+1][k]
                                 tempData[j+1][k] = 0
-                            } else if 
-                                (tempData[j][k] === tempData[j+1][k]) {
-                                    tempData[j][k] += tempData[j+1][k]
-                                    tempData[j+1][k] = 0
+                            } else if (tempData[j][k] === tempData[j+1][k]) {
+                                tempData[j][k] += tempData[j+1][k]
+                                tempData[j+1][k] = 0
                             }
                             if (tempData[j][k] === 2048) alert('you win!')
 
@@ -84,9 +88,9 @@ export default function Game () {
             } else if (e.keyCode === 40) {
                 // console.log('down arrow');
                 // down arrow
-                for (let i=tempData.length - 1; i >=0; i--) {
-                    for (let j=i; j < tempData.length; j++){ // column
-                        for (let k=0; j < tempData[0].length; k++) {          // row      i = 3, j = 0 
+                for (let i=tempData.length - 1; i >=0; i--) {  // i= 3 2 1 0
+                    for (let j=i+1; j < tempData.length; j++){ //   j= 3 2 1 0
+                        for (let k=0; k < tempData[0].length; k++) {          // row      i = 3, j = 0 
                             if (tempData[j-1][k] !== 0 && tempData[j][k] === 0) {   // row1 column0 is equal to 0
                                 tempData[j][k] = tempData[j-1][k]
                                 tempData[j-1][k] = 0
@@ -101,8 +105,8 @@ export default function Game () {
             } else if (e.keyCode === 37) {
                 // console.log('left arrow');
                 // left arrow
-                for (let i=0; i < tempData.length; i++) {
-                    for (let k=i; k >= 0; k--){    //k=0 i=1 -> k=1 1 0            // column
+                for (let i=0; i < tempData.length; i++) { // i=0 1 2 3
+                    for (let k=i; k >= 1; k--){    //        k=  1 2 3 
                         for (let j=0; j < tempData.length; j++) {          // row      i = 3, j = 0 
                             if (tempData[j][k] !== 0 && tempData[j][k-1] === 0) {   // j=0 k=0 
                                 tempData[j][k-1] = tempData[j][k]
@@ -118,9 +122,9 @@ export default function Game () {
                 }
             } else if (e.keyCode === 39) {
                 // // right arrow
-                for (let i=tempData[0].length - 1; i >= 0; i--) { //0 1 2 3
-                    for (let k=i; k < tempData[0].length; k++){ // i -> 3 2 1 0        // 3 2 1 0        // column
-                        for (let j=0; j < tempData.length; j++) {  // i=1 j=1 k=0        // row      i = 3, j = 0 
+                for (let i=tempData[0].length - 1; i >= 0; i--) { //   i= 3 2 1 0
+                    for (let k=i; k < tempData[0].length-1; k++){ // k= 2 1 0 -1
+                        for (let j=0; j < tempData.length; j++) {  //             // row      i = 3, j = 0 
                             if (tempData[j][k] !== 0 && tempData[j][k+1] === 0) {   // j=0 k=0 
                                 tempData[j][k+1] = tempData[j][k]
                                 tempData[j][k] = 0
@@ -136,9 +140,9 @@ export default function Game () {
             // let storage = [...data]
             
             if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
-                console.log("adfafadfafadfafdadfafad");
+                // console.log("adfafadfafadfafdadfafad");
                 addNumber(tempData)
-                addNumber(tempData)
+                // addNumber(tempData)
             }
             setData(tempData)
         }
@@ -182,16 +186,15 @@ export default function Game () {
     }, [])
 
     return (
-        <div>
-            <div>
-                <h1>2048</h1>
-                <p>SCORE</p>
-                <p>BEST</p>
-            </div>
             <div 
                 onKeyUp={ e => handleKeyPress(e)} 
                 tabIndex="1"
                 className="main_block_container">
+                <div>
+                    <h1>2048</h1>
+                    <p>SCORE </p>
+                    <p>BEST</p>
+                </div>
                 {data.map((row, indexOne) => {
                     return (
                         <div className="block_container"
@@ -203,8 +206,6 @@ export default function Game () {
                     )
                 })}
             </div>
-        </div>
-
     )
     // return (
     //     <div>
