@@ -1,15 +1,37 @@
 import { useEffect, useState } from "react"
 import Block from './Block'
 import axios from 'axios'
+// import cloneDeep from 'lodash.clonedeep';
 
 export default function Game () {
     const [data, setData] = useState([
-        [0, 0, 0, 0],                   
-        [0, 0, 0, 0], 
+        [0, 0, 0, 0],    // 8 2 2 0                      
+        [0, 0, 0, 0],   // 2 2 0 0
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ])
+    // [0][0] [0][1] [0][2] [0][3]
+    // [1][0] [1][1] 
+    
     var [currentScore, setCurrentScore] = useState(0)
+    // const [storage, setStorage] = useState([
+    //     [0, 0, 0, 0],    // 8 2 2 0                      
+    //     [0, 0, 0, 0],   // 2 2 0 0
+    //     [0, 0, 0, 0],
+    //     [0, 0, 0, 0]
+    // ])
+    // 8 0 0 0  if num == 0 -> data[1][0] data[0][0] i--
+    // 8 0 0 0      
+    // 8 0 0 0  same number || if the cell == 0   go up go up
+    // 2 2 2 0   16 4 4 0
+    // 0 2 2 0    2 2 0 0
+
+
+
+
+    // 0 2 0 0    0 0 2 0
+
+
 
     // Initialize the game
     const initialize = () => {
@@ -41,7 +63,10 @@ export default function Game () {
     // arrow functions
     const handleKeyPress = (e) => {
             let tempData = [...data]  
-            if (e.keyCode === 38) { // up arrow
+            // console.log('up arrow')
+            // console.log(e.keyCode);
+            if (e.keyCode === 38) {
+                // var colum = false
                 for (let i=0; i < tempData.length; i++) { // 0 1 2 3 
                     var merged = [false, false, false, false]
                     for (let j=i-1; j >= 0; j--){ //  row j=-1 0 1 2
@@ -50,9 +75,9 @@ export default function Game () {
                                 tempData[j][k] = tempData[j+1][k]
                                 tempData[j+1][k] = 0
                             } else if (!merged[k] && tempData[j][k] === tempData[j+1][k]) {
+                                merged[k] = true 
                                 tempData[j][k] += tempData[j+1][k]
                                 tempData[j+1][k] = 0 
-                                merged[k] = true 
                               
                                 let points = 0
                                 switch(tempData[j][k]) {
@@ -74,7 +99,9 @@ export default function Game () {
                         }
                     }
                 }
-            } else if (e.keyCode === 40) { // down arrow
+            } else if (e.keyCode === 40) {
+                // console.log('down arrow');
+                // down arrow
                 for (let i=tempData.length - 1; i >=0; i--) {  // i= 3 2 1 0
                     var merged = [false, false, false, false]
                     for (let j=i+1; j < tempData.length; j++){ //   j= 3 2 1 0
@@ -83,9 +110,9 @@ export default function Game () {
                                 tempData[j][k] = tempData[j-1][k]
                                 tempData[j-1][k] = 0
                             } else if (!merged[k] && tempData[j-1][k] === tempData[j][k]) { // [0][k] === [1][k]
+                                merged[k] = true
                                 tempData[j][k] += tempData[j-1][k]
                                 tempData[j-1][k] = 0
-                                merged[k] = true
 
                                 let points = 0
                                 switch(tempData[j][k]) {
@@ -106,7 +133,9 @@ export default function Game () {
                         }
                     }
                 }
-            } else if (e.keyCode === 37) { // left arrow
+            } else if (e.keyCode === 37) {
+                // console.log('left arrow');
+                // left arrow
                 for (let i=0; i < tempData.length; i++) { // i=0 1 2 3
                     var merged = [false, false, false, false]
                     for (let k=i; k >= 1; k--){    //        k=  1 2 3 
@@ -115,11 +144,12 @@ export default function Game () {
                                 tempData[j][k-1] = tempData[j][k]
                                 tempData[j][k] = 0
                             }  else if (!merged[j] && tempData[j][k] === tempData[j][k-1]) { // [0][k] === [1][k]
+                                merged[j] = true
                                 tempData[j][k-1] += tempData[j][k]
                                 tempData[j][k] = 0
-                                merged[j] = true
-                            
-                                let points = 0
+                            }
+
+                            let points = 0
                                 switch(tempData[j][k-1]) {
                                     case 4: points = 30; break
                                     case 8: points = 70; break
@@ -133,12 +163,13 @@ export default function Game () {
                                     case 2048: points = 20470; break
                                 }   
                                     setCurrentScore(currentScore + points)
-                            }
                             if (tempData[j][k] === 2048) alert('you win!')
+
                         }
                     }
                 }
-            } else if (e.keyCode === 39) {  // right arrow
+            } else if (e.keyCode === 39) {
+                // // right arrow
                 for (let i=tempData[0].length - 1; i >= 0; i--) { //   i= 3 2 1 0
                     var merged = [false, false, false, false]
                     for (let k=i; k < tempData[0].length-1; k++){ // k= 2 1 0 -1
@@ -147,9 +178,9 @@ export default function Game () {
                                 tempData[j][k+1] = tempData[j][k]
                                 tempData[j][k] = 0
                             } else if (!merged[j] && tempData[j][k] === tempData[j][k+1]) { // [0][k] === [1][k]
+                                merged[j] = true
                                 tempData[j][k+1] += tempData[j][k]
                                 tempData[j][k] = 0
-                                merged[j] = true
 
                                 let points = 0
                                 switch(tempData[j][k+1]) {
@@ -181,13 +212,13 @@ export default function Game () {
         document.onkeyup = handleKeyPress;
 
 
-    useEffect(() => {
+    useEffect( () => {
         initialize()
     }, [])
     
     // back-end API
-    useEffect(() => {
-        const userBestScore = async () => {
+    useEffect( () => {
+        const userBestScore = async function () {
             try {
                 const token = localStorage.getItem('jwt')
                 // console.log(token);
