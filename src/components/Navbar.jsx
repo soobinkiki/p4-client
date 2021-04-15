@@ -5,7 +5,7 @@ const Navbar = ({ user, handleLogout }) => {
         <div className="nav_container">
             <li>
                 <Link to="/">
-                    Play
+                    New Game
                 </Link>
             </li>
             <li>

@@ -1,15 +1,17 @@
+/*---- app.js (HOME)----*/
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
-.container {
+.homepage_container {
   display: flex;
   justify-content: center;
   padding: 5%;
 }
 
-/*--------------------Navbar --------------------*/
+
+/*----------------Navbar -------------------*/
 nav ul {
   display: flex;
   flex-direction: row;
@@ -40,22 +42,7 @@ nav a:hover {
 
 
 
-
-/*--------------Login page----------------*/
-#login_container {
-  width: 50%;
-  max-width: 500px;
-  border: 1px solid grey;
-  box-shadow: 1px 1px 1px black;
-  border-radius: 5px;
-  padding: 2%;
-}
-/*----------------------------------------*/
-
-
-
-
-/*------------In-game MAIN----------------*/
+/*-------------- Main Page----------------*/
 .main_container {
   width: 520px;
   height: 700px;
@@ -100,39 +87,76 @@ nav a:hover {
 #main_howtoplay_text {
   font-size: 1.1em;
 }
-
 /*----------------------------------------*/
 
 
 
+/*--------------Login page----------------*/
+#login_container {
+  width: 50%;
+  max-width: 500px;
+  border: 1px solid grey;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 5px;
+  padding: 2%;
+}
+/*----------------------------------------*/
 
 
-/*------------In-game board----------------*/
+
+/*--------In-game board/cell Page---------*/
 
 .block_container {
   display: flex;
   justify-content: center;
-  
 }
 
 .main_block_container {
   width: max-content;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: rgb(223, 207, 184);
 }
-/* .block {
-  height: 80px;
-  width: 80px;
-  background-color: lightgray;
-  margin: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 45px;
-  font-weight: 800;
-  color: white;
-} */
 
+.main_top_score_board {
+  display: grid;
+  grid-template-columns: 55% 20% 20% 5%;
+  margin-bottom: 4%;
+}
+
+.cell_container { 
+  border-radius: 7px;
+}
+
+/*----------------------------------------*/
+
+
+
+/*---------In-game Top dashboard----------*/
+
+.main_top_titleText_container {
+  max-width: 250px;
+}
+
+#main_top_title {
+  margin-left: 6%;
+  font-size: 4em;
+}
+
+#main_top_text {
+  margin-left: 6%;
+  font-size: 1.3em
+}
+
+.scoreBest_text_container {
+  text-align: center;
+  margin-top: 25%;
+}
+
+#current_score, #best_score {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 2em;
+}
 
 /*----------------------------------------*/
