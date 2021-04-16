@@ -24,6 +24,7 @@ const App = () => {
                 const user = jwt.decode(token)
                 // console.log('Ther user from token', user)
                 setUser(user)
+                
             }
         } catch(err) {
             console.log(err)
@@ -58,7 +59,7 @@ const App = () => {
                         <Profile user={user} />
                     </Route>
                     <Route path='/game'>
-                        <Game />
+                        <Game user={user} />
                     </Route>
                     <Route path="*">
                         <NoMatch />

@@ -153,6 +153,21 @@ nav a:hover {
   margin-top: 25%;
 }
 
+#seeBestScoreButton, #saveScoreButton {
+  width: 95px;
+  height: 23px;
+  margin-left: 5px;
+  margin-top: 10px;
+  background-color: blanchedalmond;
+  border-radius: 10px;
+  border: 1px solid gray
+}
+#seeBestScoreButton:hover, #saveScoreButton:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: rgb(246, 212, 163)
+}
+
 #current_score, #best_score {
   text-align: center;
   margin-top: 5%;
