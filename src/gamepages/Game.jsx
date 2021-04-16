@@ -60,22 +60,30 @@ export default function Game ({ user }) {
                               
                                 let points = 0
                                 switch(tempData[j][k] || tempData[j+1][k]) {
-                                    case 4: points = 30; break
-                                    case 8: points = 70; break
-                                    case 16: points = 150; break
-                                    case 32: points = 310; break
-                                    case 64: points = 630; break
-                                    case 128: points = 1270; break
-                                    case 256: points = 2550; break
-                                    case 512: points = 5110; break
-                                    case 1024: points = 10230; break
-                                    case 2048: points = 20470; break
+                                    case 4: 
+                                        points = 30;
+                                    case 8: 
+                                        points += 70;
+                                    case 16: 
+                                        points += 150;
+                                    case 32: 
+                                        points += 310;
+                                    case 64: 
+                                        points += 630;
+                                    case 128: 
+                                        points += 1270;
+                                    case 256: 
+                                        points += 2550;
+                                    case 512: 
+                                        points += 5110;
+                                    case 1024: 
+                                        points += 10230;
+                                    case 2048: 
+                                        points += 20470; break
                                 }
                                     setCurrentScore(currentScore + points)
                             }
-                            
                             if (tempData[j][k] === 2048) alert('you win!')
-
                         }
                     }
                 }
@@ -94,16 +102,26 @@ export default function Game ({ user }) {
 
                                 let points = 0
                                 switch(tempData[j][k] || tempData[j-1][k]) {
-                                    case 4: points = 30; break
-                                    case 8: points = 70; break
-                                    case 16: points = 150; break
-                                    case 32: points = 310; break
-                                    case 64: points = 630; break
-                                    case 128: points = 1270; break
-                                    case 256: points = 2550; break
-                                    case 512: points = 5110; break
-                                    case 1024: points = 10230; break
-                                    case 2048: points = 20470; break
+                                case 4: 
+                                    points = 30;
+                                case 8: 
+                                    points += 70;
+                                case 16: 
+                                    points += 150;
+                                case 32: 
+                                    points += 310;
+                                case 64: 
+                                    points += 630;
+                                case 128: 
+                                    points += 1270;
+                                case 256: 
+                                    points += 2550;
+                                case 512: 
+                                    points += 5110;
+                                case 1024: 
+                                    points += 10230;
+                                case 2048: 
+                                    points += 20470; break
                                 }
                                 setCurrentScore(currentScore + points)
                             }
@@ -111,68 +129,83 @@ export default function Game ({ user }) {
                         }
                     }
                 }
-            } else if (e.keyCode === 37) {
-                // console.log('left arrow');
-                // left arrow
+            } else if (e.keyCode === 37) { // left arrow
                 const merged = [false, false, false, false]
-                for (let i=0; i < tempData.length; i++) { // i=0 1 2 3
-                    for (let k=i; k >= 1; k--){    //        k=  1 2 3 
-                        for (let j=0; j < tempData.length; j++) {          // row      i = 3, j = 0 
-                            if (tempData[j][k] !== 0 && tempData[j][k-1] === 0) {   // j=0 k=0 
+                for (let i=0; i < tempData.length; i++) { 
+                    for (let k=i; k >= 1; k--){   
+                        for (let j=0; j < tempData.length; j++) {          
+                            if (tempData[j][k] !== 0 && tempData[j][k-1] === 0) {  
                                 tempData[j][k-1] = tempData[j][k]
                                 tempData[j][k] = 0
-                            }  else if (!merged[j] && tempData[j][k] !== 0 && tempData[j][k] === tempData[j][k-1]) { // [0][k] === [1][k]
-                                // debugger;
+                            }  else if (!merged[j] && tempData[j][k] !== 0 && tempData[j][k] === tempData[j][k-1]) {
                                 tempData[j][k-1] += tempData[j][k]
                                 tempData[j][k] = 0
                                 merged[j] = true
                             
                                 let points = 0
                                 switch(tempData[j][k-1] || tempData[j][k]) {
-                                    case 4: points = 30; break
-                                    case 8: points = 70; break
-                                    case 16: points = 150; break
-                                    case 32: points = 310; break
-                                    case 64: points = 630; break
-                                    case 128: points = 1270; break
-                                    case 256: points = 2550; break
-                                    case 512: points = 5110; break
-                                    case 1024: points = 10230; break
-                                    case 2048: points = 20470; break
+                                case 4: 
+                                    points = 30;
+                                case 8: 
+                                    points += 70;
+                                case 16: 
+                                    points += 150;
+                                case 32: 
+                                    points += 310;
+                                case 64: 
+                                    points += 630;
+                                case 128: 
+                                    points += 1270;
+                                case 256: 
+                                    points += 2550;
+                                case 512: 
+                                    points += 5110;
+                                case 1024: 
+                                    points += 10230;
+                                case 2048: 
+                                    points += 20470; break
                                 }
                                     setCurrentScore(currentScore + points)
                             }
                             if (tempData[j][k] === 2048) alert('you win!')
-
                         }
                     }
                 }
-            } else if (e.keyCode === 39) {
-                // // right arrow
+            } else if (e.keyCode === 39) { // right arrow
                 var merged = [false, false, false, false]
-                for (let i=tempData[0].length - 1; i >= 0; i--) { //   i= 3 2 1 0
-                    for (let k=i; k < tempData[0].length-1; k++){ // k= 2 1 0 -1
-                        for (let j=0; j < tempData.length; j++) {  //             // row      i = 3, j = 0 
-                            if (tempData[j][k] !== 0 && tempData[j][k+1] === 0) {   // j=0 k=0 
+                for (let i=tempData[0].length - 1; i >= 0; i--) { 
+                    for (let k=i; k < tempData[0].length-1; k++){ 
+                        for (let j=0; j < tempData.length; j++) { 
+                            if (tempData[j][k] !== 0 && tempData[j][k+1] === 0) {  
                                 tempData[j][k+1] = tempData[j][k]
                                 tempData[j][k] = 0
-                            } else if (!merged[j] && tempData[j][k] !==0 && tempData[j][k] === tempData[j][k+1]) { // [0][k] === [1][k]
+                            } else if (!merged[j] && tempData[j][k] !==0 && tempData[j][k] === tempData[j][k+1]) { 
                                 tempData[j][k+1] += tempData[j][k]
                                 tempData[j][k] = 0
                                 merged[j] = true
 
                                 let points = 0
                                 switch(tempData[j][k+1] || tempData[j][k]) {
-                                    case 4: points = 30; break
-                                    case 8: points = 70; break
-                                    case 16: points = 150; break
-                                    case 32: points = 310; break
-                                    case 64: points = 630; break
-                                    case 128: points = 1270; break
-                                    case 256: points = 2550; break
-                                    case 512: points = 5110; break
-                                    case 1024: points = 10230; break
-                                    case 2048: points = 20470; break
+                                case 4: 
+                                    points = 30;
+                                case 8: 
+                                    points += 70;
+                                case 16: 
+                                    points += 150;
+                                case 32: 
+                                    points += 310;
+                                case 64: 
+                                    points += 630;
+                                case 128: 
+                                    points += 1270;
+                                case 256: 
+                                    points += 2550;
+                                case 512: 
+                                    points += 5110;
+                                case 1024: 
+                                    points += 10230;
+                                case 2048: 
+                                    points += 20470; break
                                 }
                                     setCurrentScore(currentScore + points)
                             }
@@ -185,32 +218,31 @@ export default function Game ({ user }) {
             if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
                 addNumber(tempData)
             }
-
             setData(tempData)
-
         }
         document.onkeyup = handleKeyPress;
 
     // back-end API
     const postBestScore = async () => {
         try {
+            
             const token = localStorage.getItem('jwt')
             const authHeaders =  {
                 'authorization': token
             }
             var score = {
-                'current_score': currentScore   // req.body.current_score
+                'current_score': currentScore
             }
             const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/score`, score, { headers: authHeaders })
             
             const { findUser } = response.data
             setBestScore(findUser[0].best_score)
+            
 
         } catch (err) {
             console.log(err);
         }
     }
-
     return (
             <div 
                 className="main_block_container">
@@ -236,7 +268,7 @@ export default function Game ({ user }) {
                             onKeyUp={ e => handleKeyPress(e)}
                             tabIndex="1"
                             key={indexOne}>
-                            {row.map((cell, indexTwo) => <Block cell={cell} key={indexTwo} /> )}
+                            {row.map((cell, indexTwo) => <Block cell={cell} data={data} key={indexTwo} /> )}
                         </div>
                     )
                 })}

@@ -1,4 +1,6 @@
-export default function Block ({ cell }) {
+import { Redirect } from "react-router"
+
+export default function Block ({ cell, data }) {
     const style = {
         blockStyle: {
             height: 120,
@@ -15,7 +17,6 @@ export default function Block ({ cell }) {
     }
 
     const { blockStyle } = style
-    
     
     return (
         <div className="cell_container"
