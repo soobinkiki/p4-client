@@ -27,6 +27,7 @@ export default function Block ({ cell, data }) {
                      : cell === 32 || cell === 64 || cell === 128 ? "#b29700"
                      : cell === 256 || cell === 512 || cell === 1024 ? "gold" : "red"
             }}>
+            
             {cell !== 0 ? cell : ""}
         </div>
     )

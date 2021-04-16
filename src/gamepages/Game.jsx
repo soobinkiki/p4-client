@@ -26,10 +26,10 @@ export default function Game ({ user }) {
     
     const addNumber = (newGrid) => {
         let added = false  
-        let gridStatus = false
+        // let gridStatus = false
 
         while (!added) {
-            if (gridStatus = true) break 
+            // if (gridStatus = true) break 
 
             let random1 = Math.floor(Math.random() * 4) 
             let random2 = Math.floor(Math.random() * 4)
@@ -127,14 +127,14 @@ export default function Game ({ user }) {
                 }
             }
             
-            setData(tempData)
-            setCurrentScore(points)
             //if full 
             // 1. 2048 -> win, 2. no 2048 -> lose
-           
+            //
             if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
                 addNumber(tempData)
             }
+            setData(tempData)
+            setCurrentScore(points)
         }
         document.onkeyup = handleKeyPress;
         
@@ -205,6 +205,13 @@ export default function Game ({ user }) {
                         </div>
                     )
                 })}
+                <div className="made_in_container">
+                    <p id="copyright">&copy; 2021 made by Justin Park</p>
+                    <a href="https://www.linkedin.com/in/justin-park-4b20b8206/"><img id="linkedInIMG" src="/images/linkedin.png"></img></a>
+                    <a href="https://github.com/soobinkiki"><img id="githubIMG" src="/images/github.png" alt="GITHUB"></img></a>
+                </div>
             </div>
+
+            
     )
 }

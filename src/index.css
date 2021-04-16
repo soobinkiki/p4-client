@@ -38,6 +38,15 @@ nav a:hover {
 #nav_title {
   font-size: 2em;
 }
+
+.nav_container li {
+  text-decoration: underline;
+}
+.nav_container li:hover{
+  text-decoration: overline;
+}
+
+
 /*----------------------------------------*/
 
 
@@ -151,6 +160,7 @@ nav a:hover {
 .scoreBest_text_container {
   text-align: center;
   margin-top: 25%;
+  margin-left: 5%;
 }
 
 #seeBestScoreButton, #saveScoreButton {
@@ -176,7 +186,77 @@ nav a:hover {
 #current_score, #best_score {
   text-align: center;
   margin-top: 5%;
+  margin-left: 6%;
   font-size: 2em;
 }
 
 /*----------------------------------------*/
+
+
+
+/*--------------Profile-------------------*/
+.profile_container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 50vh;
+}
+
+#loggedIn_from {
+  text-align: center;
+  margin-top: 2%;
+}
+
+#user_profile_pic {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+.userInfo_container_left { 
+  margin-right: 2.5%; 
+}
+.userInfo_container_right { 
+  margin-left: 2.5%; 
+}
+
+.userInfo_container_right h1 {
+  font-size: 3em;
+  margin-bottom: 15%;
+}
+.userInfo_container_right p{
+  font-size: 1.3em;
+}
+.userInfo_container_right p:nth-child(3) {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+/*----------------------------------------*/
+
+
+.made_in_container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 15% 2% 2% 0;
+}
+
+#linkedInIMG, #githubIMG {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+#linkedInIMG {
+  margin: 0 10px 0 10px;
+}
+
+#linkedInIMG:hover, #githubIMG:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+#copyright{
+  margin-top: 7%;
+}
