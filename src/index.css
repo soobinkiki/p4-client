@@ -162,10 +162,15 @@ nav a:hover {
   border-radius: 10px;
   border: 1px solid gray
 }
+
 #seeBestScoreButton:hover, #saveScoreButton:hover {
   cursor: pointer;
   transform: scale(1.1);
   background-color: rgb(246, 212, 163)
+}
+
+#seeBestScoreButton {
+  width: 105px;
 }
 
 #current_score, #best_score {
