@@ -28,7 +28,8 @@ nav a {
   text-decoration: none;
   margin-right: 25px;
   margin-left: 25px;
-  color: rebeccapurple;
+  color: rgb(87, 80, 80);
+  font-size: 1.3em;
 }
 
 nav a:hover {
