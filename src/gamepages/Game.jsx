@@ -7,21 +7,12 @@ export default function Game () {
         [0, 0, 0, 0],                       
         [0, 0, 0, 0], 
         [0, 0, 0, 0],
-        [0, 0, 0, 0]
+        [0, 0, 1024, 1024]
     ])
-    const [winCount, setWinCount] = useState(0)
-    const [gamePlayed, setGamePlayed] = useState(0)
-
-    // const [checker, setChecker] = useState([
-    //     [false, false, false, false],                       
-    //     [false, false, false, false], 
-    //     [false, false, false, false],
-    //     [false, false, false, false]
-    // ])
-    
     const [currentScore, setCurrentScore] = useState(0)
     const [bestScore, setBestScore] = useState(0)
-
+    const [gameStatus, setGameStatus] = useState("👏 Good luck 👏")
+    const [disabled, setDisabled] = useState(false)
     const initialize = () => {
         let storage = [...data]
         addNumber(storage)
@@ -29,36 +20,22 @@ export default function Game () {
         setData(storage)
     }
 
-    // let checkerStorage = [...checker]
-    // setChecker(checkerStorage)
-    
     useEffect(() => {
         initialize()
     }, [])
     
     const addNumber = (newGrid) => {
-        let added = false  
-        // let gridStatus = false
-        // let counter = 0
+        let added = false
 
-        
         while (!added) {
+            
             let random1 = Math.floor(Math.random() * 4) 
             let random2 = Math.floor(Math.random() * 4)
-            // if (gridStatus = true) alert('you lose......')
 
-            if (newGrid[random1][random2] === 0) {  // variable[row][column]
+            if (newGrid[random1][random2] === 0) { 
                 newGrid[random1][random2] = Math.random() > 0.5 ? 2 : 4
                 added = true
             }
-
-            // if (newGrid[random1][random2] !== 0 && newGrid[random1][random2] !== 2048) {
-            //     counter++
-            // } else counter--
-
-            // if (counter = 16) gridStatus = true
-               
-           
         }
         
     }
@@ -66,7 +43,8 @@ export default function Game () {
     // arrow functions
     const handleKeyPress = (e) => {
             let tempData = [...data] 
-            let points = currentScore 
+            let points = currentScore
+
             if (e.keyCode === 38) { // up arrow
                 const merged = [false, false, false, false]
                 for (let i=0; i < tempData.length; i++) { 
@@ -80,9 +58,8 @@ export default function Game () {
                                 tempData[j+1][k] = 0 
                                 merged[k] = true
                               
-                                points += getPoints(tempData[j][k]) // numnber points = points + currentScore
+                                points += getPoints(tempData[j][k])
                             }
-                            if (tempData[j][k] === 2048) alert('you win!')
                         }
                     }
                 }
@@ -101,7 +78,6 @@ export default function Game () {
 
                                 points += getPoints(tempData[j][k])
                             }
-                            if (tempData[j][k] === 2048) alert('you win!')
                         }
                     }
                 }
@@ -120,7 +96,6 @@ export default function Game () {
                             
                                 points += getPoints(tempData[j][k-1])
                             }
-                            if (tempData[j][k] === 2048) alert('you win!')
                         }
                     }
                 }
@@ -139,50 +114,51 @@ export default function Game () {
 
                                 points += getPoints(tempData[j][k+1])
                             }
-                            if (tempData[j][k] === 2048) alert('you win!')
                         }
                     }
                 }
-            }
-            // setCurrentScore(points)
-            
+            }      
             var full = true
             var win = false
             for (let i = 0; i < tempData.length; i++) {
                 for (let j = 0; j < tempData[i].length; j++) {
-                    if (tempData[i][j] === 0) {     // + 2048 check
+                    if (tempData[i][j] === 0) {
                         full = false
                     } 
                     if (tempData[i][j] === 2048){
                         win = true
-                    }
-                    
+                    } 
                 }
             }
             setData(tempData)
-
-            var gamePlayed = 0
-            var winCount = 0
             if (full === false && win === true) {
-                gamePlayed++
-                winCount++
-                setGamePlayed(gamePlayed)
-                setWinCount(winCount)
-                alert('you win')
-            } else if (full === true && win === false) {
-                gamePlayed++
-                setGamePlayed(gamePlayed)
-                alert('you lose')
+                setGameStatus("🎉Congrats! You win!!🎉 ")
+                setTimeout( () => setGameStatus("click 'New Game' to play again..", {posiiton: 100}), 3000)
+                setDisabled(true)
             }
 
-            if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
+            if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && disabled) {
+                alert("You won the game. Let's play the new game. \nDon't forget to save your score!!")
+                return resetBoard()
+            } else if (full === true && win === false) {
+                setGameStatus("🔥 Oh no..the board is full.. please try again 🔥")
+                setTimeout( () => setGameStatus("Don't forget to save your score!!", {posiiton: 100}), 3000)
+                return resetBoard()
+            } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && full === false) {
                 addNumber(tempData)
             }
-
-
             setCurrentScore(points)
         }
         document.onkeyup = handleKeyPress;
+
+    const resetBoard = () => {
+        setData([
+            [0, 0, 0, 0],                       
+            [0, 0, 0, 0], 
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ])
+    }
         
     const getPoints = (val1) => { 
         let points = 0;
@@ -201,25 +177,19 @@ export default function Game () {
         return points;
     }
 
-    // back-end API
     const postBestScore = async () => {
         try {
-            
             const token = localStorage.getItem('jwt')
             const authHeaders =  {
                 'authorization': token
             }
-            var score = {
-                'current_score': currentScore
-                // 'current_score': winCount
-                // 'current_score': gamePlayed
+            var userGameInfo = {
+                'current_score': currentScore,
             }
-            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/score`, score, { headers: authHeaders })
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/score`, userGameInfo, { headers: authHeaders })
             
             const { findUser } = response.data
             setBestScore(findUser[0].best_score)
-            
-
         } catch (err) {
             console.log(err);
         }
@@ -253,6 +223,9 @@ export default function Game () {
                         </div>
                     )
                 })}
+                <div>
+                    <p id="game_status">{gameStatus}</p>
+                </div>
                 <div className="made_in_container">
                     <p id="copyright">&copy; 2021 made by Justin Park</p>
                     <a href="https://www.linkedin.com/in/justin-park-4b20b8206/"><img id="linkedInIMG" src="/images/linkedin.png"></img></a>

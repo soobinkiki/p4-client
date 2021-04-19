@@ -5,6 +5,8 @@ import axios from 'axios'
 const Profile = ({ user }) => {
     
     const [userBest, setUserBest] = useState(0)
+    const [totalGamePlayed, setTotalGamePlayed] = useState(0)
+    const [totalWinCount, setTotalWinCount] = useState(0)
 
     useEffect(() => {
         // Example access to the auth-locked route
@@ -16,11 +18,11 @@ const Profile = ({ user }) => {
                     'authorization': token
                 }
                 const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/`, { headers: authHeaders })
-                console.log(res);
                 const { userInfo } = res.data
+                console.log(userInfo);
                 setUserBest(userInfo.best_score);
                 
-                // console.log(data)
+
             } catch(err) {
                 console.log(err);
             }
@@ -36,10 +38,9 @@ const Profile = ({ user }) => {
                     <p id="loggedIn_from">Logged in from {user.provider}</p>
                 </div>
                 <div className="userInfo_container_right">
-                    <h1>Hi, {user.displayName}</h1>
-                    <p>Best score: {userBest}</p>
-                    <p>Game played: 000</p>
-                    <p>Reached 2048: 000</p>
+                    <h1>Hello, {user.name.givenName}</h1>
+                    <p>Username: {user.displayName}</p>
+                    <p>Your best score: {userBest}</p>
                 </div>
             </div>
         </>
