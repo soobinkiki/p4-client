@@ -59,7 +59,7 @@ const App = () => {
                         <Profile user={user} />
                     </Route>
                     <Route path='/game'>
-                        <Game user={user} />
+                        <Game />
                     </Route>
                     <Route path="*">
                         <NoMatch />

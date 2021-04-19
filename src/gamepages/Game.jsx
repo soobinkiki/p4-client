@@ -2,13 +2,22 @@ import { useEffect, useState } from "react"
 import Block from './Block'
 import axios from 'axios'
 
-export default function Game ({ user }) {
+export default function Game () {
     const [data, setData] = useState([
         [0, 0, 0, 0],                       
         [0, 0, 0, 0], 
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ])
+    const [winCount, setWinCount] = useState(0)
+    const [gamePlayed, setGamePlayed] = useState(0)
+
+    // const [checker, setChecker] = useState([
+    //     [false, false, false, false],                       
+    //     [false, false, false, false], 
+    //     [false, false, false, false],
+    //     [false, false, false, false]
+    // ])
     
     const [currentScore, setCurrentScore] = useState(0)
     const [bestScore, setBestScore] = useState(0)
@@ -19,6 +28,9 @@ export default function Game ({ user }) {
         addNumber(storage)
         setData(storage)
     }
+
+    // let checkerStorage = [...checker]
+    // setChecker(checkerStorage)
     
     useEffect(() => {
         initialize()
@@ -27,20 +39,26 @@ export default function Game ({ user }) {
     const addNumber = (newGrid) => {
         let added = false  
         // let gridStatus = false
+        // let counter = 0
 
+        
         while (!added) {
-            // if (gridStatus = true) break 
-
             let random1 = Math.floor(Math.random() * 4) 
             let random2 = Math.floor(Math.random() * 4)
+            // if (gridStatus = true) alert('you lose......')
 
             if (newGrid[random1][random2] === 0) {  // variable[row][column]
                 newGrid[random1][random2] = Math.random() > 0.5 ? 2 : 4
                 added = true
             }
 
-            
+            // if (newGrid[random1][random2] !== 0 && newGrid[random1][random2] !== 2048) {
+            //     counter++
+            // } else counter--
 
+            // if (counter = 16) gridStatus = true
+               
+           
         }
         
     }
@@ -126,14 +144,42 @@ export default function Game ({ user }) {
                     }
                 }
             }
+            // setCurrentScore(points)
             
-            //if full 
-            // 1. 2048 -> win, 2. no 2048 -> lose
-            //
+            var full = true
+            var win = false
+            for (let i = 0; i < tempData.length; i++) {
+                for (let j = 0; j < tempData[i].length; j++) {
+                    if (tempData[i][j] === 0) {     // + 2048 check
+                        full = false
+                    } 
+                    if (tempData[i][j] === 2048){
+                        win = true
+                    }
+                    
+                }
+            }
+            setData(tempData)
+
+            var gamePlayed = 0
+            var winCount = 0
+            if (full === false && win === true) {
+                gamePlayed++
+                winCount++
+                setGamePlayed(gamePlayed)
+                setWinCount(winCount)
+                alert('you win')
+            } else if (full === true && win === false) {
+                gamePlayed++
+                setGamePlayed(gamePlayed)
+                alert('you lose')
+            }
+
             if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
                 addNumber(tempData)
             }
-            setData(tempData)
+
+
             setCurrentScore(points)
         }
         document.onkeyup = handleKeyPress;
@@ -165,6 +211,8 @@ export default function Game ({ user }) {
             }
             var score = {
                 'current_score': currentScore
+                // 'current_score': winCount
+                // 'current_score': gamePlayed
             }
             const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/score`, score, { headers: authHeaders })
             
