@@ -9,7 +9,7 @@ export default function Home ({ user }) {
             <div className="main_container">
                 <h1 id="main_title">Ready to win?</h1>
                 <p id="main_text">Please login to play the game</p>
-                <Link to='/login'><span id="main_login_btn">Login</span></Link>
+                <Link id="login_text" to='/login'><span id="main_login_btn">Login</span></Link>
 
                 <div className="main_howtoplay">
                     <h4 id="main_howtoplay_title">HOW TO PLAY</h4>

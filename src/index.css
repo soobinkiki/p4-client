@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Lexend:wght@100&family=Shadows+Into+Light+Two&display=swap');
+
 /*---- app.js (HOME)----*/
 * {
   margin: 0px;
@@ -8,7 +11,21 @@
   display: flex;
   justify-content: center;
   padding: 5%;
+  
 }
+
+/*------------Defualt font-family-----------*/
+
+h1 {
+  font-family: 'Shadows Into Light Two', cursive;
+}
+p {
+  font-family: 'Lexend', sans-serif;
+}
+/*------------------------------------------*/
+
+
+
 
 
 /*----------------Navbar -------------------*/
@@ -48,11 +65,11 @@ nav a:hover {
 }
 
 
-/*----------------------------------------*/
+/*------------------------------------------*/
 
 
 
-/*-------------- Main Page----------------*/
+/*-------------- Main Page------------------*/
 .main_container {
   width: 520px;
   height: 700px;
@@ -72,7 +89,7 @@ nav a:hover {
   margin-top: 15%;
   margin-left: 10%;
   margin-bottom: 2%;
-  font-size: 1.3em;
+  font-size: 1.7em;
 }
 
 #main_login_btn {
@@ -83,11 +100,15 @@ nav a:hover {
 #main_login_btn:visited {
   color: black;
 }
+#login_text {
+  text-decoration: none;
+}
 
 .main_howtoplay {
   margin-top: 30%;
   margin-left: 10%;
   margin-right: 10%;
+  font-family: fantasy;
 }
 
 #main_howtoplay_title {
@@ -95,7 +116,7 @@ nav a:hover {
   margin-bottom: 2%;
 }
 #main_howtoplay_text {
-  font-size: 1.1em;
+  font-size: 1.4em;
 }
 /*----------------------------------------*/
 

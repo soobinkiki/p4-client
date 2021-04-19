@@ -7,17 +7,19 @@ export default function Game () {
         [0, 0, 0, 0],                       
         [0, 0, 0, 0], 
         [0, 0, 0, 0],
-        [0, 0, 1024, 1024]
+        [0, 0, 0, 0]
     ])
     const [currentScore, setCurrentScore] = useState(0)
     const [bestScore, setBestScore] = useState(0)
     const [gameStatus, setGameStatus] = useState("👏 Good luck 👏")
     const [disabled, setDisabled] = useState(false)
+    
     const initialize = () => {
         let storage = [...data]
         addNumber(storage)
         addNumber(storage)
         setData(storage)
+        setDisabled(false)
     }
 
     useEffect(() => {
@@ -42,6 +44,9 @@ export default function Game () {
 
     // arrow functions
     const handleKeyPress = (e) => {
+            if (disabled){
+                return alert("Please click the 'New Game' to try again!!!!!")
+            }
             let tempData = [...data] 
             let points = currentScore
 
@@ -133,32 +138,19 @@ export default function Game () {
             setData(tempData)
             if (full === false && win === true) {
                 setGameStatus("🎉Congrats! You win!!🎉 ")
-                setTimeout( () => setGameStatus("click 'New Game' to play again..", {posiiton: 100}), 3000)
+                setTimeout( () => setGameStatus("Don't forget to save your score!!", {posiiton: 100}), 3300)
                 setDisabled(true)
-            }
-
-            if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && disabled) {
-                alert("You won the game. Let's play the new game. \nDon't forget to save your score!!")
-                return resetBoard()
             } else if (full === true && win === false) {
-                setGameStatus("🔥 Oh no..the board is full.. please try again 🔥")
-                setTimeout( () => setGameStatus("Don't forget to save your score!!", {posiiton: 100}), 3000)
-                return resetBoard()
-            } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && full === false) {
+                setGameStatus("🔥 Oh no.. the board is full, please try again 🔥")
+                setTimeout( () => setGameStatus("Don't forget to save your score!!", {posiiton: 100}), 3300)
+                setDisabled(true)
+            } else if ((e.keyCode === 37 || e.keyCode === 38 || 
+                        e.keyCode === 39 || e.keyCode === 40) && full === false) {
                 addNumber(tempData)
             }
             setCurrentScore(points)
         }
         document.onkeyup = handleKeyPress;
-
-    const resetBoard = () => {
-        setData([
-            [0, 0, 0, 0],                       
-            [0, 0, 0, 0], 
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ])
-    }
         
     const getPoints = (val1) => { 
         let points = 0;
@@ -232,7 +224,5 @@ export default function Game () {
                     <a href="https://github.com/soobinkiki"><img id="githubIMG" src="/images/github.png" alt="GITHUB"></img></a>
                 </div>
             </div>
-
-            
     )
 }
