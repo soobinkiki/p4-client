@@ -2,27 +2,20 @@ import { useEffect, useState } from "react"
 import { Redirect } from "react-router"
 import axios from 'axios'
 
-const Profile = ({ user }) => {
+export default function Profile  ({ user })  {
     
     const [userBest, setUserBest] = useState(0)
-    const [totalGamePlayed, setTotalGamePlayed] = useState(0)
-    const [totalWinCount, setTotalWinCount] = useState(0)
 
     useEffect(() => {
-        // Example access to the auth-locked route
         async function getUserData() {
             try {
                 const token = localStorage.getItem('jwt')
-                // console.log(token)
                 const authHeaders = {
                     'authorization': token
                 }
                 const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/`, { headers: authHeaders })
                 const { userInfo } = res.data
-                console.log(userInfo);
                 setUserBest(userInfo.best_score);
-                
-
             } catch(err) {
                 console.log(err);
             }
@@ -48,5 +41,3 @@ const Profile = ({ user }) => {
         return <Redirect to="/login" />
     }
 }
-
-export default Profile

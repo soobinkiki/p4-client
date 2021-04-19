@@ -39,7 +39,6 @@ export default function Game () {
                 added = true
             }
         }
-        
     }
 
     // arrow functions

@@ -24,10 +24,6 @@ p {
 }
 /*------------------------------------------*/
 
-
-
-
-
 /*----------------Navbar -------------------*/
 nav ul {
   display: flex;
@@ -63,11 +59,7 @@ nav a:hover {
 .nav_container li:hover{
   text-decoration: overline;
 }
-
-
 /*------------------------------------------*/
-
-
 
 /*-------------- Main Page------------------*/
 .main_container {
@@ -120,8 +112,6 @@ nav a:hover {
 }
 /*----------------------------------------*/
 
-
-
 /*--------------Login page----------------*/
 #login_container {
   width: 50%;
@@ -132,8 +122,6 @@ nav a:hover {
   padding: 2%;
 }
 /*----------------------------------------*/
-
-
 
 /*--------In-game board/cell Page---------*/
 
@@ -165,8 +153,6 @@ nav a:hover {
 }
 
 /*----------------------------------------*/
-
-
 
 /*---------In-game Top dashboard----------*/
 
@@ -216,10 +202,7 @@ nav a:hover {
   margin-left: 6%;
   font-size: 2em;
 }
-
 /*----------------------------------------*/
-
-
 
 /*--------------Profile-------------------*/
 .profile_container {
@@ -258,10 +241,7 @@ nav a:hover {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
-
 /*----------------------------------------*/
-
 
 /*-------Copy right/linkedin/github-------*/
 .made_in_container {

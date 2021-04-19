@@ -16,15 +16,12 @@ import Game from "./gamepages/Game"
 const App = () => {
     const [user, setUser] = useState(null)
 
-    // 'Login' the user from JWT if it exists in localStorage
     useEffect(() => {
         const token = localStorage.getItem('jwt')
         try { 
             if(token) {
                 const user = jwt.decode(token)
-                // console.log('Ther user from token', user)
                 setUser(user)
-                
             }
         } catch(err) {
             console.log(err)
@@ -64,7 +61,6 @@ const App = () => {
                     <Route path="*">
                         <NoMatch />
                     </Route>
-                    
                 </Switch>
             </div>
         </Router>
