@@ -9,12 +9,12 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 const handleGoogleClick = async (e) => {
     console.log('Google Clicked!')
-    window.location.href = `/auth/google`
+    window.location.href = `https://puzzle-2048.herokuapp.com/auth/google`
 }
 
 const handleGithubClick = e => {
     console.log('Github Clicked!')
-    window.location.href=`/auth/github`
+    window.location.href=`https://puzzle-2048.herokuapp.com/auth/github`
 }
 
 const handleFacebookClick = e => {
