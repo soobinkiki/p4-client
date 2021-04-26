@@ -9,17 +9,17 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL
 
 const handleGoogleClick = async (e) => {
     console.log('Google Clicked!')
-    window.location.href = `${SERVER_URL}/auth/google`
+    window.location.href = `/auth/google`
 }
 
 const handleGithubClick = e => {
     console.log('Github Clicked!')
-    window.location.href=`${SERVER_URL}/auth/github`
+    window.location.href=`/auth/github`
 }
 
 const handleFacebookClick = e => {
     console.log('Facebook Clicked!')
-    window.location.href=`${SERVER_URL}/auth/facebook`
+    window.location.href=`/auth/facebook`
 }
 
 const Login = ({ user }) => {
